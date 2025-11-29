@@ -3,47 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Tarefa</title>
-    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Cadastrar Nova Tarefa</h1>
 
-    <form id="formTarefa" onsubmit="event.preventDefault(); cadastrarTarefa();">
-        
-        <label>Prioridade:</label>
-        <select id="prioridade" required>
-            <option value="">Selecione</option>
-            <option value="Baixa">Baixa</option>
-            <option value="Normal">Normal</option>
-            <option value="Urgente">Urgente</option>
-        </select>
-        <br><br>
+    <div class="form-container fade">
+        <h1>Cadastrar Tarefa</h1>
 
-        <label>Descrição:</label>
-        <input type="text" id="descricao" required>
-        <br><br>
+        <form id="formTarefa">
+            
+            <div>
+                <label>Descrição</label>
+                <input type="text" id="descricao" placeholder="Ex: Comprar material" required>
+            </div>
 
-        <label>Local:</label>
-        <input type="text" id="local" required>
-        <br><br>
+            <div>
+                <label>Local</label>
+                <input type="text" id="local" placeholder="Ex: IFC" required>
+            </div>
 
-        <label>Matrícula:</label>
-        <input type="number" id="matricula" required>
-        <br><br>
+            <div>
+                <label>Matrícula</label>
+                <input type="text" id="matricula" placeholder="Ex: 12015419993" required>
+            </div>
 
-        <label>Data Limite:</label>
-        <input type="datetime-local" id="dataLimite" required>
-        <br><br>
+            <div>
+                <label>Prioridade</label>
+                <select id="prioridade">
+                    <option>Normal</option>
+                    <option>Urgente</option>
+                </select>
+            </div>
 
-        <label>Recursos Necessários (separe por vírgula):</label>
-        <input type="text" id="recursosNecessarios">
-        <br><br>
+            <div>
+                <label>Data Limite</label>
+                <input type="date" id="dataLimite" required>
+            </div>
 
-        <button type="submit">Cadastrar</button>
-    </form>
+            <button class="btn" type="submit">Cadastrar</button>
+            <a href="index.html" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
 
-    <br>
-    <a href="index.html">Voltar</a>
 </body>
 </html>

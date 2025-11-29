@@ -1,95 +1,54 @@
-let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formTarefa");
 
-if (window.location.pathname.includes("cadastro.html")) {
-  document
-    .getElementById("formTarefa")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-      let prioridade = document.getElementById("prioridade").value;
-      let descricao = document.getElementById("descricao").value;
-      let local = document.getElementById("local").value;
-      let matricula = document.getElementById("matricula").value;
-      let dataLimite = document.getElementById("dataLimite").value;
-      let recursos = document.getElementById("recursosNecessarios").value;
+            const tarefa = {
+                descricao: document.getElementById("descricao").value,
+                local: document.getElementById("local").value,
+                matricula: document.getElementById("matricula").value,
+                prioridade: document.getElementById("prioridade").value,
+                dataLimite: document.getElementById("dataLimite").value
+            };
 
-      if (
-        prioridade === "" ||
-        descricao === "" ||
-        local === "" ||
-        matricula === "" ||
-        dataLimite === ""
-      ) {
-        alert("Preencha todos os campos obrigatórios.");
+            const lista = JSON.parse(localStorage.getItem("tarefas")) || [];
+            lista.push(tarefa);
+
+            localStorage.setItem("tarefas", JSON.stringify(lista));
+
+            window.location.href = "index.html";
+        });
+    }
+    mostrarTarefas();
+});
+
+function mostrarTarefas() {
+    const container = document.getElementById("containerTarefas");
+    if (!container) return;
+
+    const lista = JSON.parse(localStorage.getItem("tarefas")) || [];
+
+    container.innerHTML = "";
+
+    if (lista.length === 0) {
+        container.innerHTML = `<p class="sem-tarefas">Nenhuma tarefa cadastrada.</p>`;
         return;
-      }
+    }
 
-      let recursosArray = recursos ? recursos.split(",") : [];
+    lista.forEach(tarefa => {
+        const card = document.createElement("div");
+        card.classList.add("task-card");
 
-      let tarefa = {
-        prioridade: prioridade,
-        descricao: descricao,
-        local: local,
-        recursosNecessarios: recursosArray,
-        dataLimite: dataLimite,
-        matricula: Number(matricula),
-      };
-
-      tarefas.push(tarefa);
-
-      localStorage.setItem("tarefas", JSON.stringify(tarefas));
-
-      window.location.href = "index.html";
-    });
-}
-
-if (
-  window.location.pathname.includes("index.html") ||
-  window.location.pathname.endsWith("/")
-) {
-  let container = document.getElementById("containerTarefas");
-
-  if (tarefas.length === 0) {
-    container.innerHTML = "<p>Nenhuma tarefa cadastrada</p>";
-  } else {
-    let tabela = "<table border='1' cellpadding='6'>";
-    tabela += `
-            <tr>
-                <th>Prioridade</th>
-                <th>Descrição</th>
-                <th>Local</th>
-                <th>Recursos</th>
-                <th>Data Limite</th>
-                <th>Matrícula</th>
-            </tr>
+        card.innerHTML = `
+            <p><strong class="${tarefa.prioridade === "Urgente" ? "urgente" : ""}">${tarefa.prioridade}</strong></p>
+            <p><strong>Descrição:</strong> ${tarefa.descricao}</p>
+            <p><strong>Local:</strong> ${tarefa.local}</p>
+            <p><strong>Matrícula:</strong> ${tarefa.matricula}</p>
+            <p><strong>Data Limite:</strong> ${tarefa.dataLimite}</p>
         `;
 
-    tarefas.forEach(function (t) {
-      let cor = t.prioridade === "Urgente" ? "red" : "black";
-
-      tabela += `
-                <tr style="color: ${cor}">
-                    <td>${t.prioridade}</td>
-                    <td>${t.descricao}</td>
-                    <td>${t.local}</td>
-                    <td>${t.recursosNecessarios.join(", ")}</td>
-                    <td>${t.dataLimite}</td>
-                    <td>${t.matricula}</td>
-                </tr>
-            `;
+        container.appendChild(card);
     });
-
-    tabela += "</table>";
-    container.innerHTML = tabela;
-  }
-  var hoje = new Date();
-  hoje.setHours(0, 0, 0, 0);
-
-  var dataEscolhida = new Date(data);
-  dataEscolhida.setHours(0, 0, 0, 0);
-
-  if (dataEscolhida < hoje) {
-    alert("A data escolhida já passou!");
-  }
-  }
 }
