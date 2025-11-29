@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Tarefa</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Cadastrar Nova Tarefa</h1>
+
+    <form id="formTarefa" onsubmit="event.preventDefault(); cadastrarTarefa();">
+        
+        <label>Prioridade:</label>
+        <select id="prioridade" required>
+            <option value="">Selecione</option>
+            <option value="Baixa">Baixa</option>
+            <option value="Normal">Normal</option>
+            <option value="Urgente">Urgente</option>
+        </select>
+        <br><br>
+
+        <label>Descrição:</label>
+        <input type="text" id="descricao" required>
+        <br><br>
+
+        <label>Local:</label>
+        <input type="text" id="local" required>
+        <br><br>
+
+        <label>Matrícula:</label>
+        <input type="number" id="matricula" required>
+        <br><br>
+
+        <label>Data Limite:</label>
+        <input type="datetime-local" id="dataLimite" required>
+        <br><br>
+
+        <label>Recursos Necessários (separe por vírgula):</label>
+        <input type="text" id="recursosNecessarios">
+        <br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <br>
+    <a href="index.html" class="voltar">Voltar</a>
+</body>
+</html>
