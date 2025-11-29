@@ -12,10 +12,10 @@
         <h1>Cadastrar Tarefa</h1>
 
         <form id="formTarefa">
-            
+
             <div>
                 <label>Descrição</label>
-                <input type="text" id="descricao" placeholder="Ex: Comprar material" required>
+                <input type="text" id="descricao" placeholder="Ex: Entregar trabalho" required>
             </div>
 
             <div>
@@ -25,12 +25,13 @@
 
             <div>
                 <label>Matrícula</label>
-                <input type="text" id="matricula" placeholder="Ex: 12015419993" required>
+                <input type="text" id="matricula" placeholder="Ex: 3030303" required>
             </div>
 
             <div>
                 <label>Prioridade</label>
                 <select id="prioridade">
+                    <option>Baixa</option>
                     <option>Normal</option>
                     <option>Urgente</option>
                 </select>
@@ -41,8 +42,21 @@
                 <input type="date" id="dataLimite" required>
             </div>
 
+            <!-- Recursos -->
+            <div class="recursos-container">
+                <label>Recursos Necessários</label>
+
+                <div class="recursos-box">
+                    <input type="text" id="inputRecurso" placeholder="Ex: Computador">
+                    <button type="button" id="addRecurso" class="btn-add">Adicionar</button>
+                </div>
+
+                <ul id="listaRecursos" class="lista-recursos"></ul>
+            </div>
+
             <button class="btn" type="submit">Cadastrar</button>
             <a href="index.html" class="btn btn-secondary">Voltar</a>
+
         </form>
     </div>
 
